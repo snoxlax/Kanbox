@@ -1,258 +1,41 @@
 import { createTheme } from "@mui/material/styles";
-import { setGlobalTheme, token } from "@atlaskit/tokens";
-
-setGlobalTheme({
-  colorMode: "dark",
-  shape: "shape",
-  typography: "typography",
-  elevation: "elevation",
-});
 
 const FONT_FALLBACK =
-  'ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif';
+  '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif';
 
 const muiTheme = createTheme({
-  /**
-   * Spacing System - Complete ADS Token Mapping
-   *
-   * Maps MUI spacing factors to all available ADS space tokens.
-   * ADS provides tokens from space.0 (0rem) to space.1000 (5rem).
-   *
-   * Usage: spacing(2) → var(--ds-space-200, 1rem)
-   */
-  spacing: factor => {
-    const spacingMap = {
-      0: token("space.0", "0rem"), // 0px
-      0.25: token("space.025", "0.125rem"), // 2px
-      0.5: token("space.050", "0.25rem"), // 4px
-      0.75: token("space.075", "0.375rem"), // 6px
-      1: token("space.100", "0.5rem"), // 8px
-      1.5: token("space.150", "0.75rem"), // 12px
-      2: token("space.200", "1rem"), // 16px
-      2.5: token("space.250", "1.25rem"), // 20px
-      3: token("space.300", "1.5rem"), // 24px
-      4: token("space.400", "2rem"), // 32px
-      5: token("space.500", "2.5rem"), // 40px
-      6: token("space.600", "3rem"), // 48px
-      8: token("space.800", "4rem"), // 64px
-      10: token("space.1000", "5rem"), // 80px
-    };
-
-    return spacingMap[factor] ?? `${factor * 0.5}rem`;
-  },
-
-  /**
-   * Shape Configuration
-   *
-   * Uses ADS radius.small as the default border radius.
-   * This provides a consistent 4px (0.25rem) border radius across components.
-   *
-   * Larger components can override to radius.medium or radius.large in styleOverrides.
-   */
-  shape: {
-    borderRadius: token("radius.small", "0.25rem"),
-  },
-
-  /**
-   * Typography Configuration
-   *
-   * Maps MUI typography variants to ADS font scales.
-   * - Uses token() for fontFamily and fontWeight (CSS variables)
-   * - fontSize and lineHeight are hardcoded rem values based on ADS scales
-   *   (ADS doesn't provide separate fontSize/lineHeight tokens)
-   *
-   * ADS Font Scale Mapping:
-   * h1 → font.heading.xxlarge (35px/500)
-   * h2 → font.heading.xlarge  (29px/600)
-   * h3 → font.heading.large   (24px/500)
-   * h4 → font.heading.medium  (20px/500)
-   * h5 → font.heading.small   (16px/600)
-   * h6 → font.heading.xsmall  (14px/600)
-   * body1 → font.body         (14px/400)
-   * body2 → font.body.small   (11px/400)
-   */
   typography: {
-    fontFamily: token("font.family.body", FONT_FALLBACK),
+    fontFamily: FONT_FALLBACK,
     fontSize: 14,
     fontWeightLight: 300,
-    fontWeightRegular: token("font.weight.regular", "400"),
-    fontWeightMedium: token("font.weight.medium", "500"),
-    fontWeightBold: token("font.weight.bold", "700"),
-
-    h1: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "2.1875rem",
-      lineHeight: "2.5rem",
-      fontWeight: token("font.weight.medium", "500"),
-    },
-    h2: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "1.8125rem",
-      lineHeight: "2rem",
-      fontWeight: token("font.weight.semibold", "600"),
-    },
-    h3: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "1.5rem",
-      lineHeight: "1.75rem",
-      fontWeight: token("font.weight.medium", "500"),
-    },
-    h4: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "1.25rem",
-      lineHeight: "1.5rem",
-      fontWeight: token("font.weight.medium", "500"),
-    },
-    h5: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "1rem",
-      lineHeight: "1.25rem",
-      fontWeight: token("font.weight.semibold", "600"),
-    },
-    h6: {
-      fontFamily: token("font.family.heading", FONT_FALLBACK),
-      fontSize: "0.875rem",
-      lineHeight: "1rem",
-      fontWeight: token("font.weight.semibold", "600"),
-    },
-    body1: {
-      fontSize: "0.875rem",
-      lineHeight: "1.25rem",
-      fontWeight: token("font.weight.regular", "400"),
-    },
-    body2: {
-      fontSize: "0.6875rem",
-      lineHeight: "1rem",
-      fontWeight: token("font.weight.regular", "400"),
-    },
-    button: {
-      fontSize: "0.875rem",
-      fontWeight: token("font.weight.medium", "500"),
-      textTransform: "none",
-    },
-    caption: {
-      fontSize: "0.6875rem",
-      lineHeight: "1rem",
-      fontWeight: token("font.weight.regular", "400"),
-    },
-    overline: {
-      fontSize: "0.6875rem",
-      lineHeight: "1rem",
-      fontWeight: token("font.weight.regular", "400"),
-      textTransform: "uppercase",
-    },
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
   },
-
-  /**
-   * Palette Configuration
-   *
-   * Maps MUI color system to ADS color tokens using token() function.
-   * This provides dynamic theming capabilities but generates MUI warnings
-   * about color channels (which is expected and acceptable).
-   *
-   * Color Mapping:
-   * - primary → brand (blue)
-   * - secondary → neutral (gray)
-   * - error → danger (red)
-   * - warning → warning (orange/yellow)
-   * - info → information (blue)
-   * - success → success (green)
-   *
-   * Note: MUI will show warnings about palette.defaultChannel because
-   * CSS variables can't be parsed for channel generation. This is
-   * expected and doesn't affect functionality.
-   */
-  cssVariables: true,
   palette: {
+    mode: "dark",
     primary: {
-      main: token("color.background.brand.bold", "#1868DB"),
-      light: token("color.background.brand.subtlest", "#E9F2FE"),
-      dark: token("color.background.brand.boldest", "#123263"),
-      contrastText: token("color.text.inverse", "#FFFFFF"),
+      main: "#1976d2",
     },
     secondary: {
-      main: token("color.background.neutral.bold", "#505258"),
-      light: token("color.background.neutral", "#F7F8F9"),
-      dark: token("color.background.neutral.bold.pressed", "#3B3D42"),
-      contrastText: token("color.text.inverse", "#FFFFFF"),
-    },
-    error: {
-      main: token("color.background.danger.bold", "#C9372C"),
-      light: token("color.background.danger", "#FFECEB"),
-      dark: token("color.background.danger.bold.pressed", "#872821"),
-      contrastText: token("color.text.inverse", "#FFFFFF"),
-    },
-    warning: {
-      main: token("color.background.warning.bold", "#FCA700"),
-      light: token("color.background.warning", "#FFF5DB"),
-      dark: token("color.background.warning.bold.pressed", "#F68909"),
-      contrastText: token("color.text", "#292A2E"),
-    },
-    info: {
-      main: token("color.background.information.bold", "#1868DB"),
-      light: token("color.background.information", "#E9F2FE"),
-      dark: token("color.background.information.bold.pressed", "#144794"),
-      contrastText: token("color.text.inverse", "#FFFFFF"),
-    },
-    success: {
-      main: token("color.background.success.bold", "#6A9A23"),
-      light: token("color.background.success", "#EFFFD6"),
-      dark: token("color.background.success.bold.pressed", "#3F5224"),
-      contrastText: token("color.text.inverse", "#FFFFFF"),
-    },
-    text: {
-      primary: token("color.text", "#292A2E"),
-      secondary: token("color.text.subtle", "#626F86"),
-      disabled: token("color.text.disabled", "#7D818A"),
-    },
-    divider: token("color.border", "rgba(11, 18, 14, 0.14)"),
-    input: {
-      backgroundColor: token("color.background.input", "#292a2e"),
-      color: token("color.text", "#e0e0e0"),
+      main: "#9c27b0",
     },
   },
 
-  /**
-   * Shadows Configuration (Elevation)
-   *
-   * Maps MUI shadow levels to ADS elevation tokens.
-   * MUI expects an array of 25 shadow values (0-24).
-   *
-   * ADS provides 3 shadow levels:
-   * - elevation.shadow.raised (subtle)
-   * - elevation.shadow.overflow (medium)
-   * - elevation.shadow.overlay (strong)
-   *
-   * Mapping:
-   * 0: none
-   * 1: raised
-   * 2: overflow
-   * 3-24: overlay (repeated for remaining indices)
-   */
-  shadows: [
-    "none",
-    token(
-      "elevation.shadow.raised",
-      "0px 1px 1px rgba(30, 31, 33, 0.25), 0px 0px 1px rgba(30, 31, 33, 0.31)"
-    ),
-    token(
-      "elevation.shadow.overflow",
-      "0px 0px 8px rgba(30, 31, 33, 0.16), 0px 0px 1px rgba(30, 31, 33, 0.12)"
-    ),
-    ...Array(22).fill(
-      token(
-        "elevation.shadow.overlay",
-        "0px 8px 12px rgba(30, 31, 33, 0.15), 0px 0px 1px rgba(30, 31, 33, 0.31)"
-      )
-    ), // Indices 3-24 (22 elements)
-  ],
-
+  useCssVariables: false,
   /**
    * Component Style Overrides (Dark Theme)
    *
    * Custom styling for form components with dark mode colors.
    */
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none", // removes the overlay
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -277,9 +60,9 @@ const muiTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: token("color.text", "#CECFD2"), // Label text color (off-white)
+          color: "#CECFD2", // Label text color (off-white)
           "&.Mui-focused": {
-            color: token("color.text.brand", "#669DF1"), // Label text color when input is focused (blue)
+            color: "#669DF1", // Label text color when input is focused (blue)
           },
         },
       },
@@ -326,70 +109,55 @@ const muiTheme = createTheme({
           zIndex: 1500,
         },
         paper: {
-          backgroundColor: token("color.background.input", "#2B2C2F"), // Autocomplete dropdown background color (very dark gray)
-          color: token("color.text", "#CECFD2"), // Autocomplete dropdown text color (light gray)
+          backgroundColor: "#2B2C2F", // Autocomplete dropdown background color (very dark gray)
+          color: "#CECFD2", // Autocomplete dropdown text color (light gray)
           border: "none",
         },
         listbox: {
           "& .MuiAutocomplete-option": {
-            color: token("color.text", "#CECFD2"), // Autocomplete option text color (light gray)
+            color: "#CECFD2", // Autocomplete option text color (light gray)
             borderLeft: "3px solid transparent", // Default transparent border to maintain spacing
             "&:hover": {
-              backgroundColor: token(
-                "color.background.input.hovered",
-                "#303134"
-              ), // Autocomplete option background on hover (lighter dark gray)
+              backgroundColor: "#303134", // Autocomplete option background on hover (lighter dark gray)
             },
             "&.Mui-focused": {
-              backgroundColor: token(
-                "color.background.input.hovered",
-                "#303134"
-              ), // Autocomplete option background when focused (lighter dark gray)
+              backgroundColor: "#303134", // Autocomplete option background when focused (lighter dark gray)
             },
             "&[aria-selected='true']": {
               backgroundColor: "transparent", // Selected option background (transparent)
-              borderLeft: `3px solid ${token("color.text.brand", "#669DF1")}`, // Selected option left border (blue)
+              borderLeft: "3px solid #669DF1", // Selected option left border (blue)
               "&:hover": {
-                backgroundColor: token(
-                  "color.background.selected.hovered",
-                  "#123263"
-                ), // Selected option background on hover (blue)
+                backgroundColor: "#123263", // Selected option background on hover (blue)
               },
               "&.Mui-focused": {
-                backgroundColor: token(
-                  "color.background.selected.hovered",
-                  "#123263"
-                ), // Selected option background when focused (blue)
+                backgroundColor: "#123263", // Selected option background when focused (blue)
               },
             },
           },
         },
         popupIndicator: {
-          color: token("color.icon", "#CECFD2"), // Dropdown arrow icon color (light gray)
+          color: "#CECFD2", // Dropdown arrow icon color (light gray)
         },
         clearIndicator: {
-          color: token("color.icon", "#CECFD2"), // Clear/close button icon color (light gray)
+          color: "#CECFD2", // Clear/close button icon color (light gray)
         },
       },
     },
     MuiCheckbox: {
       styleOverrides: {
         root: {
-          color: token("color.icon.subtle", "#A9ABAF"), // Unchecked checkbox border/icon color (medium gray)
+          color: "#A9ABAF", // Unchecked checkbox border/icon color (medium gray)
           "& .MuiSvgIcon-root": {
-            color: token("color.icon.subtle", "#A9ABAF"), // Unchecked checkbox icon color (medium gray)
+            color: "#A9ABAF", // Unchecked checkbox icon color (medium gray)
           },
           "&.Mui-checked": {
-            color: token("color.text.brand", "#669DF1"), // Checked checkbox color (blue)
+            color: "#669DF1", // Checked checkbox color (blue)
             "& .MuiSvgIcon-root": {
-              color: token("color.text.brand", "#669DF1"), // Checked checkbox icon color (blue)
+              color: "#669DF1", // Checked checkbox icon color (blue)
             },
           },
           "&:hover": {
-            backgroundColor: token(
-              "color.background.neutral.subtle.hovered",
-              "#CECED912"
-            ), // Checkbox background on hover (very light gray)
+            backgroundColor: "#CECED912", // Checkbox background on hover (very light gray)
           },
         },
       },
@@ -400,64 +168,46 @@ const muiTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: token("color.background.brand.bold", "#8fb8f6"), // Button background color (light blue, matching card-save-button)
-          color: token("color.text.inverse", "#000000"), // Button text color (inverse text token)
+          backgroundColor: "#8fb8f6", // Button background color (light blue, matching card-save-button)
+          color: "#000000", // Button text color
           padding: "6px 12px",
           minWidth: 0, // Remove default min-width
           lineHeight: "20px", // Line height
-          margin: "0.5rem 0rem 0", // Remove default margin
           boxShadow: "none", // Remove default box shadow
-          borderRadius: token("radius.small", "4px"),
+          borderRadius: "4px",
+          textTransform: "none", // Prevent uppercase text transformation
           "&:hover": {
-            backgroundColor: token(
-              "color.background.brand.bold.hovered",
-              "#6f9ce6"
-            ), // Button background on hover (darker blue, matching card-save-button)
-            color: token("color.text.inverse", "#000000"), // Button text color on hover (inverse text token)
+            backgroundColor: "#6f9ce6", // Button background on hover (darker blue, matching card-save-button)
+            color: "#000000", // Button text color on hover
           },
           "&:active": {
-            backgroundColor: token(
-              "color.background.brand.bold.pressed",
-              "#6f9ce6"
-            ), // Button background when active (darker blue)
-            color: token("color.text.inverse", "#000000"), // Button text color when active (inverse text token)
+            backgroundColor: "#6f9ce6", // Button background when active (darker blue)
+            color: "#000000", // Button text color when active
           },
           "&.Mui-disabled": {
-            backgroundColor: token(
-              "color.background.neutral.subtle",
-              "#F7F8F9"
-            ), // Disabled button background (light gray)
-            color: token("color.text.disabled", "#7D818A"), // Disabled button text color (gray)
-            border: `1px solid ${token("color.border", "#7D818A")}`, // Disabled button border
+            backgroundColor: "#F7F8F9", // Disabled button background (light gray)
+            color: "#7D818A", // Disabled button text color (gray)
+            border: "1px solid #7D818A", // Disabled button border
           },
         },
         outlined: {
           backgroundColor: "transparent", // Outlined button background (transparent)
-          color: token("color.text.brand", "#8fb8f6"), // Outlined button text color (brand blue)
-          border: `1px solid ${token("color.text.brand", "#8fb8f6")}`, // Outlined button border (brand blue)
+          color: "#8fb8f6", // Outlined button text color (brand blue)
+          border: "1px solid #8fb8f6", // Outlined button border (brand blue)
           "&:hover": {
-            backgroundColor: token(
-              "color.background.brand.subtlest",
-              "rgba(143, 184, 246, 0.1)"
-            ), // Outlined button background on hover (subtle blue tint)
-            color: token("color.text.brand", "#8fb8f6"), // Outlined button text color on hover (brand blue)
-            border: `1px solid ${token("color.text.brand", "#8fb8f6")}`, // Outlined button border on hover
+            backgroundColor: "rgba(143, 184, 246, 0.1)", // Outlined button background on hover (subtle blue tint)
+            color: "#8fb8f6", // Outlined button text color on hover (brand blue)
+            border: "1px solid #8fb8f6", // Outlined button border on hover
           },
           "&:active": {
-            backgroundColor: token(
-              "color.background.brand.bold.pressed",
-              "#6f9ce6"
-            ), // Outlined button background when active (darker blue)
-            color: token("color.text.inverse", "#000000"), // Outlined button text color when active (black)
-            border: `1px solid ${token(
-              "color.background.brand.bold.pressed",
-              "#6f9ce6"
-            )}`, // Outlined button border when active
+            backgroundColor: "#6f9ce6", // Outlined button background when active (darker blue)
+            color: "#000000", // Outlined button text color when active (black)
+            border: "1px solid #6f9ce6", // Outlined button border when active
           },
           "&.Mui-disabled": {
             backgroundColor: "transparent", // Disabled outlined button background (transparent)
-            color: token("color.text.disabled", "#7D818A"), // Disabled outlined button text color (gray)
-            border: `1px solid ${token("color.border", "#7D818A")}`, // Disabled outlined button border
+            color: "#7D818A", // Disabled outlined button text color (gray)
+            border: "1px solid #7D818A", // Disabled outlined button border
           },
         },
       },
@@ -522,8 +272,8 @@ const muiTheme = createTheme({
           },
           "& .MuiAvatarGroup-avatar": {
             border: "0px solid transparent", // dark border, override MUI default
-            backgroundColor: "var(--gray5)", // dark surplus background
-            color: "var(--grey1)", // white "+X" text
+            color: "var(--gray1)",
+            backgroundColor: "var(--gray5)",
           },
         },
       },
@@ -537,26 +287,26 @@ const muiTheme = createTheme({
         root: {
           width: "32px",
           height: "32px",
-          borderRadius: token("radius.large"),
-          color: token("color.icon"),
-          backgroundColor: token("color.background.neutral.subtle"),
+          borderRadius: "8px",
+          color: "#CECFD2",
+          backgroundColor: "transparent",
           "&:hover": {
-            backgroundColor: token("color.background.neutral.hovered"),
-            color: token("color.icon"),
+            backgroundColor: "var(--gray4)",
+            color: "#CECFD2",
           },
           "&.Mui-selected": {
-            color: token("color.text.inverse"),
-            backgroundColor: token("color.background.selected"),
+            color: "#FFFFFF",
+            backgroundColor: "#1868DB",
             "&:hover": {
-              backgroundColor: token("color.background.selected.hovered"),
-              color: token("color.text.inverse"),
+              backgroundColor: "#144794",
+              color: "#FFFFFF",
             },
           },
           variants: [
             {
               props: { variant: "square" },
               style: {
-                borderRadius: token("radius.small"),
+                borderRadius: "4px",
               },
             },
           ],

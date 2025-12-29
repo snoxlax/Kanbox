@@ -2,19 +2,19 @@ import React from "react";
 import { Avatar as MuiAvatar } from "@mui/material";
 
 const TRELLO_COLORS = [
-  "#0066FF", // Bold Blue
-  "#E53935", // Bold Red
-  "#FFB300", // Bold Orange-Yellow
-  "#43A047", // Bold Green
-  "#00ACC1", // Bold Cyan
-  "#8E24AA", // Bold Purple
-  "#E91E63", // Bold Pink-Magenta
-  "#FDD835", // Bold Yellow-Gold
-  "#424242", // Bold Dark Gray
-  "#616161", // Bold Medium Gray
+  { bgcolor: "#0066FF", color: "#E5E5E5" }, // Bold Blue
+  { bgcolor: "#E53935", color: "#E5E5E5" }, // Bold Red
+  { bgcolor: "#FFB300", color: "#292A2E" }, // Bold Orange-Yellow
+  { bgcolor: "#43A047", color: "#E5E5E5" }, // Bold Green
+  { bgcolor: "#00ACC1", color: "#292A2E" }, // Bold Cyan
+  { bgcolor: "#8E24AA", color: "#E5E5E5" }, // Bold Purple
+  { bgcolor: "#E91E63", color: "#E5E5E5" }, // Bold Pink-Magenta
+  { bgcolor: "#FDD835", color: "#292A2E" }, // Bold Yellow-Gold
+  { bgcolor: "#424242", color: "#E5E5E5" }, // Bold Dark Gray
+  { bgcolor: "#616161", color: "#E5E5E5" }, // Bold Medium Gray
 ];
 
-export function Avatar({ user, size = 24 }) {
+export function Avatar({ user, size = 24, fontSize = 14 }) {
   function stringToColor(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -27,11 +27,13 @@ export function Avatar({ user, size = 24 }) {
     const parts = name.trim().split(" ");
     const first = parts[0]?.[0] ?? "";
     const second = parts[1]?.[0] ?? "";
+    const colorConfig = stringToColor(name);
 
     return {
       sx: {
-        bgcolor: stringToColor(name),
-        fontSize: size * 0.45,
+        bgcolor: colorConfig.bgcolor,
+        color: colorConfig.color,
+        fontSize: fontSize,
       },
       children: `${first}${second}`,
     };

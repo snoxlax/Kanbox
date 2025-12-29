@@ -129,6 +129,54 @@
   --bg-snow: url("../../snow.svg");
   --bg-volcano: url("../../volcano.svg");
   --bg-crystal: url("../../crystal.svg");
+
+  /* Design System (--ds-) Variables */
+  /* Surface & Background */
+  --ds-surface: #1d2125;
+  --ds-background-neutral: rgba(255, 255, 255, 0.04);
+  --ds-background-neutral-hovered: rgba(255, 255, 255, 0.08);
+  --ds-background-neutral-subtle-hovered: rgba(255, 255, 255, 0.06);
+  --ds-background-selected: #1872f144;
+  --ds-background-brand-bold: #1868db;
+  --ds-background-information-bold: #1868db;
+  --ds-background-information-bold-hovered: #144794;
+  --ds-background-danger-bold: #ca3521;
+  --ds-background-danger-bold-hovered: #ae2a19;
+  --ds-background-danger-bold-pressed: #601e16;
+  --ds-background-accent-blue-subtle-pressed: #e9f2fe;
+
+  /* Text Colors */
+  --ds-text: #cecfd2;
+  --ds-text-subtle: #9fadbc;
+  --ds-text-inverse: #ffffff;
+  --ds-color-text-primary: #292a2e;
+  --ds-color-text-inverse: #ffffff;
+
+  /* Border & Divider */
+  --ds-border: rgba(255, 255, 255, 0.1);
+
+  /* Links */
+  --ds-link: #669df1;
+  --ds-link-pressed: #144794;
+
+  /* Icons */
+  --ds-icon-selected: #096df9;
+
+  /* Shadows */
+  --ds-shadow-raised: 0px 1px 1px rgba(30, 31, 33, 0.25),
+    0px 0px 1px rgba(30, 31, 33, 0.31);
+
+  /* Border Radius */
+  --ds-radius-small: 4px;
+  --ds-radius-xlarge: 12px;
+
+  /* Spacing */
+  --ds-space-150: 12px;
+
+  /* Typography */
+  --ds-font-body: 14px/1.25rem ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
+  --ds-font-weight-medium: 500;
 }
 
 /* Solid Color Background Classes */

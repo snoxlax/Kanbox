@@ -166,7 +166,8 @@ export function CardPopover({
         slotProps={{
           paper: {
             sx: {
-              backgroundColor: "transparent",
+              background: "transparent",
+              backgroundImage: "none", // removes dark mode overlay
               boxShadow: "none",
             },
           },

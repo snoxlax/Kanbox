@@ -39,8 +39,8 @@
 .list-header h2 {
   margin: 0;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .list-title-input {
@@ -48,12 +48,11 @@
 }
 
 .list-title-input .MuiInputBase-input {
-  font-size: 1.1rem;
   padding: 4px 8px;
   margin: 0;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .cards-droppable-wrapper {
@@ -109,7 +108,10 @@
   display: none;
 }
 
-.list-add-card-header,
+.list-add-card-header {
+  padding: 0.5rem;
+}
+
 .list-footer {
   display: flex;
   flex-direction: column;
@@ -117,9 +119,8 @@
   margin: 0.5rem 0 0 0;
 }
 
-.list-add-card-header button,
-.list-footer button {
+.add-card-card-button {
   justify-content: start;
   padding: 0.5rem;
-  border-radius: var(--ds-radius-small, 4px);
+  border-radius: 6px;
 }

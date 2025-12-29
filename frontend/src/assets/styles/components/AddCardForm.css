@@ -6,28 +6,23 @@
 .add-card-buttons-container {
   display: flex;
   align-items: center;
+  justify-content: start;
   gap: 5px;
-}
-
-.add-card-buttons-container .add-card-contained-button {
-  padding: 0.6rem 1rem 0.6rem 1rem;
-  text-transform: none;
-  font: var(--ds-font-body);
-  font-size: 16px;
-  font-weight: var(--ds-font-weight-medium, 500);
+  padding: 0.5rem 0rem 0.1rem 0rem;
 }
 
 .add-card-content {
-  display: flex;
-  flex-direction: column;
   background-color: var(--gray4);
   color: var(--gray1);
   border-radius: 6px;
-  padding: 0.5rem;
-  text-align: left;
+  min-height: 69px;
   box-sizing: border-box;
 }
 
 .add-card-form .card-title-input {
   background-color: var(--gray4);
+  padding: 0.2rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  margin-left: 0.75rem;
 }
