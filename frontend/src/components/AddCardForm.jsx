@@ -41,7 +41,7 @@ export function AddCardForm({
   return (
     <form className="add-card-form" onSubmit={handleAddCard}>
       <div className="add-card-content">
-        <input
+        <textarea
           type="text"
           className="card-title-input"
           value={title}
@@ -59,15 +59,7 @@ export function AddCardForm({
         >
           Add card
         </Button>
-        <IconButton
-          sx={{
-            margin: "0.5rem 0 0 0",
-          }}
-          size="small"
-          aria-label="close"
-          onClick={onHideAddCardForm}
-          className="add-close-button"
-        >
+        <IconButton aria-label="close" onClick={onHideAddCardForm}>
           <CloseIcon />
         </IconButton>
       </div>

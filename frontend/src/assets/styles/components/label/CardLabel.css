@@ -11,10 +11,9 @@
 
 .card-label-text {
   font-weight: 500;
-  font-size: 0.7em;
+  font-size: 12px;
   line-height: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-transform: capitalize;
 }
 
 .card-label.open {

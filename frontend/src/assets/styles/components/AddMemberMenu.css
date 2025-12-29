@@ -95,7 +95,6 @@
   background: none;
   border: none;
   border-radius: 4px;
-  color: var(--ds-color-text-primary);
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
   flex-shrink: 0;
@@ -112,7 +111,6 @@
 }
 
 .member-name {
-  color: var(--ds-color-text-primary);
   font-size: 14px;
   font-weight: 400;
 }

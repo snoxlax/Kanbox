@@ -58,9 +58,6 @@ export function AddList({ onAddList }) {
               Add list
             </Button>
             <IconButton
-              sx={{
-                margin: "0.5rem 0 0 0",
-              }}
               size="small"
               aria-label="close"
               onClick={handleHideAddList}

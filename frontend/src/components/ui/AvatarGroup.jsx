@@ -1,11 +1,18 @@
 import { AvatarGroup as MuiAvatarGroup } from "@mui/material";
 
-export function AvatarGroup({ size = 24, max = 3, children, sx, ...props }) {
+export function AvatarGroup({
+  fontSize = 12,
+  size = 24,
+  max = 3,
+  children,
+  sx,
+  ...props
+}) {
   const defaultSx = {
     "& .MuiAvatarGroup-avatar": {
       width: size,
       height: size,
-      fontSize: 12,
+      fontSize: fontSize,
     },
     ...sx,
   };

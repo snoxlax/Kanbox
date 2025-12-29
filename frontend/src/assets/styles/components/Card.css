@@ -98,6 +98,10 @@
   opacity: 0;
   transition: opacity 0.2s ease;
   z-index: 1;
+  &:hover {
+    background-color: var(--gray3);
+    color: var(--gray1);
+  }
 }
 
 .card-content-container:hover .card-edit-button,
@@ -117,9 +121,8 @@
 .card-title-input {
   margin: 0;
   margin-top: auto;
-  font-size: 1.15em;
+  font-size: 14px;
   font-weight: normal;
-  font-family: inherit;
   line-height: 1.4;
   padding: 0.5rem 1.5rem 0.5rem 0.5rem;
   word-break: break-word;
