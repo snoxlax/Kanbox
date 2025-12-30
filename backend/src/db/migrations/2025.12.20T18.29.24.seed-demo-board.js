@@ -15,7 +15,8 @@
  * - Lior has 0 cards in progress, 2 in review, 2 in to do
  */
 
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
+import { generateKeyBetween } from "fractional-indexing";
 
 export const up = async ({ context }) => {
   const db = context;
@@ -46,7 +47,9 @@ export const up = async ({ context }) => {
     .collection("users")
     .deleteMany({ username: { $in: demoUsernames } });
   if (deletedUsers.deletedCount > 0) {
-    console.log(`✓ Cleaned up ${deletedUsers.deletedCount} existing demo users`);
+    console.log(
+      `✓ Cleaned up ${deletedUsers.deletedCount} existing demo users`
+    );
   }
 
   // Create team members
@@ -193,13 +196,22 @@ export const up = async ({ context }) => {
     console.log(`    • ${label.title} (${label.color}): ${label._id}`);
   });
 
-  // Create lists
+  // Create lists with valid fractional-indexing positions
+  // Generate positions sequentially to maintain order
+  const listPositions = [];
+  let prevPosition = null;
+  for (let i = 0; i < 6; i++) {
+    const position = generateKeyBetween(prevPosition, null);
+    listPositions.push(position);
+    prevPosition = position;
+  }
+
   const lists = [
     {
       boardId,
       title: "📋 Backlog",
       description: "Ideas and tasks for future development",
-      position: "a0",
+      position: listPositions[0],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -209,7 +221,7 @@ export const up = async ({ context }) => {
       boardId,
       title: "📝 To Do",
       description: "Planned for current sprint",
-      position: "b0",
+      position: listPositions[1],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -219,7 +231,7 @@ export const up = async ({ context }) => {
       boardId,
       title: "🚧 In Progress",
       description: "Currently being worked on",
-      position: "c0",
+      position: listPositions[2],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -229,7 +241,7 @@ export const up = async ({ context }) => {
       boardId,
       title: "👀 Code Review",
       description: "Awaiting peer review",
-      position: "d0",
+      position: listPositions[3],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -239,7 +251,7 @@ export const up = async ({ context }) => {
       boardId,
       title: "🧪 QA",
       description: "Ready for quality assurance",
-      position: "e0",
+      position: listPositions[4],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -249,7 +261,7 @@ export const up = async ({ context }) => {
       boardId,
       title: "✅ Done",
       description: "Completed tasks",
-      position: "f0",
+      position: listPositions[5],
       archivedAt: null,
       deletedAt: null,
       createdAt: new Date(),
@@ -263,13 +275,17 @@ export const up = async ({ context }) => {
 
   // Helper to get label IDs by title
   const getLabelIds = labelTitles => {
-    const foundLabels = insertedBoard.labels.filter(label => labelTitles.includes(label.title));
+    const foundLabels = insertedBoard.labels.filter(label =>
+      labelTitles.includes(label.title)
+    );
     const labelIds = foundLabels.map(label => label._id);
 
     // Log if any labels weren't found
-    const notFound = labelTitles.filter(title => !insertedBoard.labels.find(l => l.title === title));
+    const notFound = labelTitles.filter(
+      title => !insertedBoard.labels.find(l => l.title === title)
+    );
     if (notFound.length > 0) {
-      console.warn(`Warning: Labels not found: ${notFound.join(', ')}`);
+      console.warn(`Warning: Labels not found: ${notFound.join(", ")}`);
     }
 
     return labelIds;
@@ -1059,11 +1075,7 @@ REDIS_TTL=300
 <li>Network reconnection handling</li>
 </ul>`,
       position: "a0",
-      labelIds: getLabelIds([
-        "feature",
-        "backend",
-        "priority:medium",
-      ]),
+      labelIds: getLabelIds(["feature", "backend", "priority:medium"]),
       assignees: [
         {
           userId: jordan._id,
@@ -1118,11 +1130,7 @@ REDIS_TTL=300
 <li>Test across all pages</li>
 </ul>`,
       position: "a1",
-      labelIds: getLabelIds([
-        "feature",
-        "design",
-        "priority:medium",
-      ]),
+      labelIds: getLabelIds(["feature", "design", "priority:medium"]),
       assignees: [
         {
           userId: vlad._id,
@@ -1436,19 +1444,32 @@ REDIS_TTL=300
   console.log(`✓ Created ${cards.length} cards`);
 
   // Verify labels on cards
-  const cardsWithLabels = cards.filter(c => c.labelIds && c.labelIds.length > 0);
-  console.log(`\n✓ Cards with labels: ${cardsWithLabels.length} / ${cards.length}`);
+  const cardsWithLabels = cards.filter(
+    c => c.labelIds && c.labelIds.length > 0
+  );
+  console.log(
+    `\n✓ Cards with labels: ${cardsWithLabels.length} / ${cards.length}`
+  );
 
   if (cardsWithLabels.length > 0) {
     const sampleCard = cardsWithLabels[0];
     console.log(`\nSample card verification:`);
     console.log(`  Card: "${sampleCard.title}"`);
-    console.log(`  Label IDs: ${sampleCard.labelIds.filter(Boolean).map(id => id.toString()).join(', ')}`);
+    console.log(
+      `  Label IDs: ${sampleCard.labelIds
+        .filter(Boolean)
+        .map(id => id.toString())
+        .join(", ")}`
+    );
     console.log(`  Label IDs count: ${sampleCard.labelIds.length}`);
 
     // Verify the labels exist in the board
-    const actualCard = await db.collection("cards").findOne({ title: sampleCard.title });
-    console.log(`  Verified in DB: ${actualCard.labelIds ? actualCard.labelIds.length : 0} labels`);
+    const actualCard = await db
+      .collection("cards")
+      .findOne({ title: sampleCard.title });
+    console.log(
+      `  Verified in DB: ${actualCard.labelIds ? actualCard.labelIds.length : 0} labels`
+    );
   } else {
     console.warn(`⚠ WARNING: No cards have labels assigned!`);
   }
