@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useColorScheme } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
+import { Brightness7, Brightness4 } from "@mui/icons-material";
 
 export function HomePage() {
+  const { mode, setMode } = useColorScheme();
+
+  const handleToggle = () => {
+    setMode(mode === "light" ? "dark" : "light");
+  };
+
   return (
     <main className="landing-page">
       <header className="landing-header">
@@ -25,6 +34,13 @@ export function HomePage() {
           </Link>
 
           <div className="header-actions">
+            <IconButton
+              onClick={handleToggle}
+              color="inherit"
+              aria-label="toggle theme"
+            >
+              {mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
             <Link to="/login" className="header-link">
               Log in
             </Link>

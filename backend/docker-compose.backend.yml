@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@db:27017/${MONGO_DATABASE}?authSource=admin
+      PORT: 3000
+      NODE_ENV: development
+      BASE_URL: http://localhost:3000
+      CORS_ORIGIN: http://localhost:5173
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    networks:
+      - kanbox_network
+
+networks:
+  kanbox_network:
+    name: kanbox_network

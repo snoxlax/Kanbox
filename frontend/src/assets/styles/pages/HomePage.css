@@ -13,12 +13,6 @@ main:has(.landing-page) {
   background: transparent;
 }
 
-body:has(.landing-page) {
-  overflow: hidden;
-  height: 100vh;
-  background: transparent;
-}
-
 /* Landing page root */
 .landing-page {
   display: flex;

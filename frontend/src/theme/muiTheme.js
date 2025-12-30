@@ -4,6 +4,10 @@ const FONT_FALLBACK =
   '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif';
 
 const muiTheme = createTheme({
+  colorSchemes: {
+    light: true,
+    dark: true,
+  },
   typography: {
     fontFamily: FONT_FALLBACK,
     fontSize: 14,
