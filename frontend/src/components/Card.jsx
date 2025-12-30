@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import DriveFileRenameOutline from "@mui/icons-material/DriveFileRenameOutline";
 import NotesRounded from "@mui/icons-material/NotesRounded";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CheckIcon from "@mui/icons-material/Check";
+import EditSquareIcon from "@mui/icons-material/EditSquare";
 import IconButton from "@mui/material/IconButton";
 import { AvatarGroup } from "./ui/AvatarGroup";
 import { Draggable } from "@hello-pangea/dnd";
@@ -136,6 +137,17 @@ export function Card({
                     {card.description && card.description !== "<p></p>" && (
                       <NotesRounded />
                     )}
+                    {card.comments && card.comments.length > 0 && (
+                      <div className="card-footer-left-comments">
+                        <ChatBubbleOutlineOutlined /> {card.comments.length}
+                      </div>
+                    )}
+                    {card.attachments && card.attachments.length > 0 && (
+                      <div className="card-footer-left-attachments">
+                        <AttachFile />
+                        {card.attachments.length}
+                      </div>
+                    )}
                   </div>
                   <div className="card-footer-right">
                     {card.assignees.length > 0 && (
@@ -160,9 +172,17 @@ export function Card({
                   Save
                 </Button>
               </div>
+              <IconButton
+                onClick={handleSave}
+                aria-label="Save card"
+                className="card-edit-button"
+              >
+                <CheckIcon />
+              </IconButton>
             </Box>
           ) : (
             <Box
+              ref={editCardRef}
               className="card-content-container"
               onClick={handleClickCard}
               sx={card.cover?.textOverlay ? coverStyle : undefined}
@@ -172,7 +192,6 @@ export function Card({
                   <div className="card-cover" style={coverStyle}></div>
                 )}
               <div
-                ref={editCardRef}
                 className={`card-content ${
                   isOverlay && coverImg ? "card-content--overlay" : ""
                 }`}
@@ -231,15 +250,15 @@ export function Card({
                     )}
                   </div>
                 </div>
-                <IconButton
-                  onClick={handleClick}
-                  aria-describedby={id}
-                  aria-label="Edit card"
-                  className="card-edit-button"
-                >
-                  <DriveFileRenameOutline />
-                </IconButton>
               </div>
+              <IconButton
+                onClick={handleClick}
+                aria-describedby={id}
+                aria-label="Edit card"
+                className="card-edit-button"
+              >
+                <EditSquareIcon />
+              </IconButton>
             </Box>
           )}
           <CardPopover

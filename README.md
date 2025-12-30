@@ -4,6 +4,4 @@
 
 <h1 align="center">Kanbox</h1>
 
-<p align="center">
-  A modern Kanban board application for project management
-</p>
+<p align="center">A modern Kanban board application for project management</p>

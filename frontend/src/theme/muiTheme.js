@@ -168,7 +168,7 @@ const muiTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          backgroundColor: "#8fb8f6", // Button background color (light blue, matching card-save-button)
+          backgroundColor: "#669DF1", // Button background color (light blue, matching card-save-button)
           color: "#000000", // Button text color
           padding: "6px 12px",
           minWidth: 0, // Remove default min-width
@@ -177,7 +177,7 @@ const muiTheme = createTheme({
           borderRadius: "4px",
           textTransform: "none", // Prevent uppercase text transformation
           "&:hover": {
-            backgroundColor: "#6f9ce6", // Button background on hover (darker blue, matching card-save-button)
+            backgroundColor: "#6facF1", // Button background on hover (darker blue, matching card-save-button)
             color: "#000000", // Button text color on hover
           },
           "&:active": {

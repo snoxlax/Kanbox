@@ -33,6 +33,7 @@
 
 .card-modal-container {
   display: flex;
+  position: relative;
   flex-direction: row;
   background: var(--gray4);
   overflow-y: auto;
@@ -492,10 +493,6 @@
 }
 
 @media only screen and (max-width: 637px) {
-  .card-modal-container {
-    position: relative;
-  }
-
   .card-modal-box.open,
   .card-modal-box.closed {
     width: calc(100vw - 1rem);
