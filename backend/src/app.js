@@ -5,25 +5,22 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import routes from "./routes/index.js";
 import errorHandler from "./middleware/error-handler.js";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const app = express();
 
-// Serve static files from public directory
-app.use(express.static(join(__dirname, "../public")));
-
-// CORS configuration - allow same-origin when serving React app
+// CORS configuration - allow cross-origin requests from frontend
 const corsOptions = {
   credentials: true,
 };
 
-// Only set specific origin for development or when frontend is served separately
+// Set specific origin when frontend is served separately
 if (config.cors.origin) {
   corsOptions.origin = config.cors.origin;
+} else if (config.app.env === "production") {
+  // In production, require CORS_ORIGIN to be set when frontend is separate
+  console.warn(
+    "Warning: CORS_ORIGIN not set. Frontend may not be able to connect."
+  );
 }
 
 app.use(cors(corsOptions));
@@ -45,12 +42,8 @@ app.get("/health", function (_req, res) {
   res.status(200).json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
-if (config.app.env === "production") {
-  // SPA routing - serve index.html for all non-API routes
-  app.get("/{*splat}", function (_req, res) {
-    res.sendFile(join(__dirname, "../public/index.html"));
-  });
-}
+// Backend is now API-only - no static file serving or SPA routing
+// Frontend should be deployed separately and connect via CORS
 
 app.use(errorHandler);
 

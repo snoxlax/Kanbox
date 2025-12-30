@@ -1,6 +1,11 @@
 import Axios from "axios";
 
-const BASE_URL = import.meta.env.PROD ? "/api/" : "//localhost:3000/api/";
+// Use environment variable for API URL, fallback to relative path or localhost
+const BASE_URL = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api/`
+  : import.meta.env.PROD 
+    ? "/api/" 
+    : "//localhost:3000/api/";
 
 const axios = Axios.create({ withCredentials: true });
 
