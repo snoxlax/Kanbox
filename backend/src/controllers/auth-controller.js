@@ -1,6 +1,7 @@
 import { User } from "../models/User.js";
 import jwt from "jsonwebtoken";
 import createError from "http-errors";
+import { config } from "../config/env.js";
 
 export async function signup(req, res) {
   const { email, username, fullname, password } = req.body;
@@ -16,7 +17,23 @@ export async function signup(req, res) {
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
     expiresIn: "24h",
   });
-  res.cookie("token", token, { httpOnly: true, sameSite: "strict" });
+
+  // Cookie settings for cross-origin support
+  const cookieOptions = {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  };
+
+  // For production (cross-origin), use sameSite: none and secure: true
+  if (config.app.env === "production") {
+    cookieOptions.sameSite = "none";
+    cookieOptions.secure = true;
+  } else {
+    // For development (same origin), use sameSite: strict
+    cookieOptions.sameSite = "strict";
+  }
+
+  res.cookie("token", token, cookieOptions);
   res.status(201).json({ user: user.getSafeUser() });
 }
 
@@ -31,12 +48,38 @@ export async function login(req, res) {
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
     expiresIn: "24h",
   });
-  res.cookie("token", token, { httpOnly: true, sameSite: "strict" });
+
+  // Cookie settings for cross-origin support
+  const cookieOptions = {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  };
+
+  // For production (cross-origin), use sameSite: none and secure: true
+  if (config.app.env === "production") {
+    cookieOptions.sameSite = "none";
+    cookieOptions.secure = true;
+  } else {
+    // For development (same origin), use sameSite: strict
+    cookieOptions.sameSite = "strict";
+  }
+
+  res.cookie("token", token, cookieOptions);
   res.json({ user: user.getSafeUser() });
 }
 
 export function logout(_req, res) {
-  res.clearCookie("token");
+  // Clear cookie with same options used to set it
+  const clearCookieOptions = {};
+
+  if (config.app.env === "production") {
+    clearCookieOptions.sameSite = "none";
+    clearCookieOptions.secure = true;
+  } else {
+    clearCookieOptions.sameSite = "strict";
+  }
+
+  res.clearCookie("token", clearCookieOptions);
   res.status(204).send();
 }
 
