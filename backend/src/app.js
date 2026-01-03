@@ -8,20 +8,10 @@ import errorHandler from "./middleware/error-handler.js";
 
 const app = express();
 
-// CORS configuration - allow cross-origin requests from frontend
 const corsOptions = {
   credentials: true,
+  origin: config.cors.origin,
 };
-
-// Set specific origin when frontend is served separately
-if (config.cors.origin) {
-  corsOptions.origin = config.cors.origin;
-} else if (config.app.env === "production") {
-  // In production, require CORS_ORIGIN to be set when frontend is separate
-  console.warn(
-    "Warning: CORS_ORIGIN not set. Frontend may not be able to connect."
-  );
-}
 
 app.use(cors(corsOptions));
 
@@ -41,9 +31,6 @@ app.use("/api", routes);
 app.get("/health", function (_req, res) {
   res.status(200).json({ status: "OK", timestamp: new Date().toISOString() });
 });
-
-// Backend is now API-only - no static file serving or SPA routing
-// Frontend should be deployed separately and connect via CORS
 
 app.use(errorHandler);
 
