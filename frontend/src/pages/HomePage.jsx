@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useColorScheme } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
@@ -14,6 +15,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const user = useSelector(storeState => storeState.auth.currentUser);
   const { mode, setMode } = useColorScheme();
+  const videoRef = useRef(null);
   console.log(user);
 
   const handleToggle = () => {
@@ -31,6 +33,19 @@ export function HomePage() {
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // Reset to beginning
     }
   };
 
@@ -130,10 +145,14 @@ export function HomePage() {
           <div className="hero-mockup animate-fade-in-up">
             <div className="hero-mockup-inner group">
               <div className="hero-mockup-gradient"></div>
-              <div className="hero-mockup-content">
+              <div
+                className="hero-mockup-content"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <video
-                  src="/assets/videos/hero-mockup.mp4"
-                  autoPlay
+                  ref={videoRef}
+                  src="https://res.cloudinary.com/duy4ib9zw/video/upload/v1767556019/projectvid_v742dg.mp4"
                   muted
                   loop
                 ></video>
