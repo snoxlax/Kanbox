@@ -1,13 +1,37 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useColorScheme } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { Brightness7, Brightness4 } from "@mui/icons-material";
+import { login } from "../store/actions/auth-actions";
+import { useSelector } from "react-redux";
+
+const DEMO_CREDENTIALS = {
+  email: "vlad@example.com",
+  password: "test",
+};
 
 export function HomePage() {
+  const navigate = useNavigate();
+  const user = useSelector(storeState => storeState.auth.currentUser);
   const { mode, setMode } = useColorScheme();
+  console.log(user);
 
   const handleToggle = () => {
     setMode(mode === "light" ? "dark" : "light");
+  };
+
+  const handleLoginDemo = async () => {
+    try {
+      if (user) {
+        navigate("/board");
+      } else {
+        await login(DEMO_CREDENTIALS);
+        navigate("/board");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      throw error;
+    }
   };
 
   return (
@@ -95,9 +119,12 @@ export function HomePage() {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link to="/board" className="btn btn-secondary btn-hero">
+            <button
+              className="btn btn-secondary btn-hero"
+              onClick={handleLoginDemo}
+            >
               Demo Board
-            </Link>
+            </button>
           </div>
 
           <div className="hero-mockup animate-fade-in-up">
