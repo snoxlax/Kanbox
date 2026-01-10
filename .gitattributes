@@ -1,1 +1,11 @@
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.webp binary
+
+# Text files
 * text eol=lf
