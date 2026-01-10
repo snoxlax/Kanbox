@@ -151,13 +151,9 @@ export function Card({
                   </div>
                   <div className="card-footer-right">
                     {card.assignees.length > 0 && (
-                      <AvatarGroup fontSize={12} max={4}>
+                      <AvatarGroup max={4}>
                         {card.assignees.map(assignee => (
-                          <Avatar
-                            key={assignee._id}
-                            user={assignee}
-                            fontSize={12}
-                          />
+                          <Avatar key={assignee._id} user={assignee} />
                         ))}
                       </AvatarGroup>
                     )}
@@ -240,11 +236,7 @@ export function Card({
                     {card.assignees.length > 0 && (
                       <AvatarGroup max={4}>
                         {card.assignees.map(assignee => (
-                          <Avatar
-                            key={assignee._id}
-                            user={assignee}
-                            fontSize={11}
-                          />
+                          <Avatar key={assignee._id} user={assignee} />
                         ))}
                       </AvatarGroup>
                     )}

@@ -197,7 +197,12 @@ export function BoardDetails() {
           {board.members && board.members.length > 0 && (
             <AvatarGroup size={32} max={4}>
               {board.members.map(member => (
-                <Avatar size={32} key={member._id} user={member} />
+                <Avatar
+                  size={32}
+                  fontSize={16}
+                  key={member._id}
+                  user={member}
+                />
               ))}
             </AvatarGroup>
           )}

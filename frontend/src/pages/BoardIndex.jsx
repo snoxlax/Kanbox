@@ -43,7 +43,7 @@ export function BoardIndex() {
       <div className="board-index-content">
         {currentUser && (
           <header className="workspace-header">
-            <Avatar user={currentUser} size={64} />
+            <Avatar user={currentUser} size={64} fontSize={32} />
             <div className="workspace-info">
               <div className="workspace-name">
                 <h1>{currentUser.fullname}'s workspace</h1>

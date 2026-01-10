@@ -67,7 +67,7 @@ export function Header() {
               className="user-menu-button"
               aria-label="User menu"
             >
-              <Avatar user={user} size={32} />
+              <Avatar user={user} size={32} fontSize={16} />
             </button>
           </div>
         )}

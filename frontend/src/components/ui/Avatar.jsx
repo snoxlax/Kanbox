@@ -3,18 +3,18 @@ import { Avatar as MuiAvatar } from "@mui/material";
 
 const TRELLO_COLORS = [
   { bgcolor: "#0066FF", color: "#E5E5E5" }, // Bold Blue
-  { bgcolor: "#E53935", color: "#E5E5E5" }, // Bold Red
+  { bgcolor: "#E53935", color: "#292A2E" }, // Bold Red
   { bgcolor: "#FFB300", color: "#292A2E" }, // Bold Orange-Yellow
-  { bgcolor: "#43A047", color: "#E5E5E5" }, // Bold Green
+  { bgcolor: "#43A047", color: "#292A2E" }, // Bold Green
   { bgcolor: "#00ACC1", color: "#292A2E" }, // Bold Cyan
   { bgcolor: "#8E24AA", color: "#E5E5E5" }, // Bold Purple
-  { bgcolor: "#E91E63", color: "#E5E5E5" }, // Bold Pink-Magenta
+  { bgcolor: "#E91E63", color: "#292A2E" }, // Bold Pink-Magenta
   { bgcolor: "#FDD835", color: "#292A2E" }, // Bold Yellow-Gold
-  { bgcolor: "#424242", color: "#E5E5E5" }, // Bold Dark Gray
+  { bgcolor: "#8E241A", color: "#E5E5E5" }, // Bold Dark Gray
   { bgcolor: "#616161", color: "#E5E5E5" }, // Bold Medium Gray
 ];
 
-export function Avatar({ user, size = 24, fontSize = 14 }) {
+export function Avatar({ user, size = 24, fontSize = 12 }) {
   function stringToColor(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
