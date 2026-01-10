@@ -1,10 +1,4 @@
-# Kanbox
-
 <img src="docs/readme-banner.png" alt="Kanbox Logo" />
-
-<p align="center">
-  <strong>A modern Kanban board application for project management</strong>
-</p>
 
 <p align="center">
   <a href="#features">Features</a> •
