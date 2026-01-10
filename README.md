@@ -1,4 +1,4 @@
-<img src="project-docs/banner.png" alt="Kanbox Logo" />
+<img src="project-docs/readme-b.png" alt="Kanbox Logo" />
 
 <p align="center">
   <a href="#features">Features</a> •
