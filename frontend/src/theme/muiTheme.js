@@ -198,6 +198,9 @@ const muiTheme = createTheme({
           backgroundColor: "transparent", // Outlined button background (transparent)
           color: "#8fb8f6", // Outlined button text color (brand blue)
           border: "1px solid #8fb8f6", // Outlined button border (brand blue)
+          "& .MuiButton-icon": {
+            marginRight: "0.25rem",
+          },
           "&:hover": {
             backgroundColor: "rgba(143, 184, 246, 0.1)", // Outlined button background on hover (subtle blue tint)
             color: "#8fb8f6", // Outlined button text color on hover (brand blue)
@@ -262,7 +265,6 @@ const muiTheme = createTheme({
         root: {
           backgroundColor: "#374151", // dark surplus background
           color: "var(--grey1)", // white "+X" text
-          border: "1px solid #1f2937", // dark border for surplus
         },
       },
     },

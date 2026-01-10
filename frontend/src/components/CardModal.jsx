@@ -165,7 +165,8 @@ export function CardModal({ listTitle, card, onEditCard, onClose, isOpen }) {
                           <Avatar
                             key={assignee.userId}
                             user={assignee}
-                            size={36}
+                            size={34}
+                            fontSize={14}
                           />
                         ))}
                       </>
@@ -191,7 +192,9 @@ export function CardModal({ listTitle, card, onEditCard, onClose, isOpen }) {
                         {label.title}
                       </div>
                     ))}
-                    <button className="add-label-button">+</button>
+                    <button className="add-label-button">
+                      <AddIcon fontSize="small" />
+                    </button>
                   </div>
                 </div>
               )}
