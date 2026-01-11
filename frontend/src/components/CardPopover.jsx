@@ -11,7 +11,7 @@ import {
   TurnedInNotOutlined,
   DriveFileRenameOutline,
 } from "@mui/icons-material";
-import { Backdrop, Popover } from "@mui/material";
+import { Popover } from "@mui/material";
 import { CardActionForm } from "./card/CardActionForm";
 import { PopoverMenu } from "./ui/PopoverMenu";
 import { AddMemberMenu } from "./AddMemberMenu";
@@ -136,15 +136,9 @@ export function CardPopover({
   const popoverOpen = Boolean(popoverAnchorEl);
 
   return (
-    <Backdrop
-      sx={{
-        zIndex: theme => theme.zIndex.modal - 1,
-      }}
-      open={open}
-      onClick={handleClose}
-      className="card-container"
-    >
+    <>
       <Popover
+        transitionDuration={150}
         disableEnforceFocus
         disableAutoFocus
         className="card-popover"
@@ -167,8 +161,12 @@ export function CardPopover({
           paper: {
             sx: {
               background: "transparent",
-              backgroundImage: "none", // removes dark mode overlay
               boxShadow: "none",
+            },
+          },
+          backdrop: {
+            sx: {
+              backgroundColor: "hsla(0, 0%, 0%, 0.6)",
             },
           },
         }}
@@ -233,7 +231,7 @@ export function CardPopover({
             />
           </PopoverMenu>
         )}
-    </Backdrop>
+    </>
   );
 }
 
@@ -249,6 +247,11 @@ function cardActionsMenuItems() {
       label: "Change members",
       key: "changeMembers",
       icon: <PermIdentity />,
+    },
+    {
+      label: "Change cover",
+      key: "changeCover",
+      icon: <DriveFileRenameOutline />,
     },
     { label: "Move card", key: "moveCard", icon: <East /> },
     { label: "Copy card", key: "copyCard", icon: <ContentCopyOutlined /> },
