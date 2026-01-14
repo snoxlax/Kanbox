@@ -44,3 +44,7 @@ vite.config.ts.timestamp-*
 memory-bank/
 
 tmp/
+
+#Helper files
+frontend/helper-files/
+backend/helper-files/
