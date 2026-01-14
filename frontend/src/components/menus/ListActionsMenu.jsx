@@ -5,15 +5,15 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 
-import { Popover } from "./Popover";
-import "../assets/styles/components/ListActionsMenu.css";
+import { Popover } from "../ui/Popover";
+import "../../assets/styles/components/ListActionsMenu.css";
 import { CopyListForm } from "./CopyListForm";
 import { MoveListForm } from "./MoveListForm";
 import {
   moveList,
   loadBoards,
   deleteList,
-} from "../store/actions/board-actions";
+} from "../../store/actions/board-actions";
 
 export function ListActionsMenu({
   list,

@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { updateBoard } from "../store/actions/board-actions";
-import { BackgroundGrid } from "./ui/BackgroundGrid";
+import { updateBoard } from "../../store/actions/board-actions";
+import { BackgroundGrid } from "../ui/BackgroundGrid";
 import {
   GRADIENT_BACKGROUNDS,
   IMAGE_BACKGROUNDS,
   SOLID_BACKGROUNDS,
-} from "../services/board/board-backgrounds";
+} from "../../services/board/board-backgrounds";
 
 export function BackgroundSelector({ currentBackground }) {
   const boardId = useSelector(state => state.boards.board._id);

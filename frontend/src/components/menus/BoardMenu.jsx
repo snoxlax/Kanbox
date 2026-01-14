@@ -8,10 +8,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Chip from "@mui/material/Chip";
-import { Popover } from "../Popover";
-import { BackgroundSelector } from "../BackgroundSelector";
-import { Avatar } from "./Avatar";
-import { AvatarGroup } from "./AvatarGroup";
+import { Popover } from "../ui/Popover";
+import { BackgroundSelector } from "./BackgroundSelector";
+import { Avatar } from "../ui/Avatar";
+import { AvatarGroup } from "../ui/AvatarGroup";
 
 import {
   PersonAdd,

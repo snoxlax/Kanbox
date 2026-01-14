@@ -7,12 +7,12 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "@mui/material/Link";
-import { AuthFormLayout } from "./auth/AuthFormLayout";
-import { FormField } from "./forms/FormField";
-import { PasswordField } from "./forms/PasswordField";
-import { PasswordStrengthIndicator } from "./forms/PasswordStrengthIndicator";
-import { validationRules } from "../services/forms/validation-service";
-import { calculatePasswordStrength } from "../services/forms/form-utils";
+import { AuthFormLayout } from "./AuthFormLayout";
+import { FormField } from "../ui/FormField";
+import { PasswordField } from "../ui/PasswordField";
+import { PasswordStrengthIndicator } from "../ui/PasswordStrengthIndicator";
+import { validationRules } from "../../services/forms/validation-service";
+import { calculatePasswordStrength } from "../../services/forms/form-utils";
 
 export function SignupForm({ onSubmit }) {
   const [submitStatus, setSubmitStatus] = useState(null);

@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import { PopoverMenu } from "./ui/PopoverMenu";
-import { attachmentService } from "../services/attachment-service";
-import { isValidURL } from "../services/util-service";
-import { addCardAttachment } from "../store/actions/board-actions";
+import { PopoverMenu } from "../ui/PopoverMenu";
+import { attachmentService } from "../../services/attachment-service";
+import { isValidURL } from "../../services/util-service";
+import { addCardAttachment } from "../../store/actions/board-actions";
 
 export function CardAttachmentsMenu({ card, anchorEl, isOpen, onClose }) {
   const [isSaving, setIsSaving] = useState(false);

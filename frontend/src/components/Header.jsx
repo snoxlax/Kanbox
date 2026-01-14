@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { useSelector } from "react-redux";
 import { Avatar } from "./ui/Avatar";
-import { UserMenu } from "./UserMenu";
+import { UserMenu } from "../components/menus/UserMenu";
 import "../assets/styles/components/Header.css";
 
 export function Header() {

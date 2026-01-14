@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { UserMessage } from "./components/UserMessage";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { UserMessage } from "./components/ui/UserMessage";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { AdminIndex } from "./pages/AdminIndex";
 import { AboutUs, AboutTeam, AboutVision } from "./pages/AboutUs";
 import { BoardDetails } from "./pages/BoardDetails";
@@ -8,7 +8,6 @@ import { BoardIndex } from "./pages/BoardIndex";
 import { CardDetails } from "./pages/CardDetails";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
-// import { Login } from "./pages/LoginSignup";
 import { SignupPage } from "./pages/SignupPage";
 import { ThemeComparison } from "./pages/ThemeComparison";
 import { UserDetails } from "./pages/UserDetails";

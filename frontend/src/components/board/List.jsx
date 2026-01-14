@@ -5,12 +5,12 @@ import AddRounded from "@mui/icons-material/AddRounded";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import { TextField } from "@mui/material";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import { Card } from "./Card";
-import { ListActionsMenu } from "./ListActionsMenu";
-import { SCROLL_DIRECTION, useScrollTo } from "../hooks/useScrollTo";
-import { setActiveListIndex } from "../store/actions/ui-actions";
-import { updateList } from "../store/actions/board-actions";
-import { AddCardForm } from "./AddCardForm";
+import { Card } from "../card/Card";
+import { ListActionsMenu } from "../menus/ListActionsMenu";
+import { SCROLL_DIRECTION, useScrollTo } from "../../hooks/useScrollTo";
+import { setActiveListIndex } from "../../store/actions/ui-actions";
+import { updateList } from "../../store/actions/board-actions";
+import { AddCardForm } from "../card/AddCardForm";
 
 export function List({
   list,

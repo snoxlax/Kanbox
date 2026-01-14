@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
-import { TextEditor } from "./ui/TextEditor";
-import { Avatar } from "./ui/Avatar";
+import { TextEditor } from "../ui/TextEditor";
+import { Avatar } from "../ui/Avatar";
 import {
   addComment,
   updateComment,
   deleteComment,
-} from "../store/actions/board-actions";
-import { selectCurrentUser } from "../store/selectors/auth-selectors";
+} from "../../store/actions/board-actions";
+import { selectCurrentUser } from "../../store/selectors/auth-selectors";
 
 export function CardComments({ card }) {
   const currentUser = useSelector(selectCurrentUser);

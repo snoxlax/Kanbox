@@ -6,11 +6,11 @@ import Button from "@mui/material/Button";
 import CheckIcon from "@mui/icons-material/Check";
 import EditSquareIcon from "@mui/icons-material/EditSquare";
 import IconButton from "@mui/material/IconButton";
-import { AvatarGroup } from "./ui/AvatarGroup";
+import { AvatarGroup } from "../ui/AvatarGroup";
 import { Draggable } from "@hello-pangea/dnd";
-import { CardPopover } from "./CardPopover";
-import { deleteCard, editCard } from "../store/actions/board-actions";
-import { Avatar } from "./ui/Avatar";
+import { CardPopover } from "../menus/CardPopover";
+import { deleteCard, editCard } from "../../store/actions/board-actions";
+import { Avatar } from "../ui/Avatar";
 import { AttachFile, ChatBubbleOutlineOutlined } from "@mui/icons-material";
 
 export function Card({

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createBoard, loadBoard } from "../store/actions/board-actions";
-import { Popover } from "./Popover";
+import { createBoard, loadBoard } from "../../store/actions/board-actions";
+import { Popover } from "../ui/Popover";
 import {
   GRADIENT_BACKGROUNDS,
   IMAGE_BACKGROUNDS,
   SOLID_BACKGROUNDS,
-} from "../services/board/board-backgrounds";
-import { BackgroundGrid } from "./ui/BackgroundGrid";
+} from "../../services/board/board-backgrounds";
+import { BackgroundGrid } from "../ui/BackgroundGrid";
 
 export function CreateBoardForm({
   anchorEl,

@@ -2,12 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { CircularProgress, Box } from "@mui/material";
-import { validateSession } from "../store/actions/auth-actions";
+import { validateSession } from "../../store/actions/auth-actions";
 import {
   selectIsAuthenticated,
   selectAuthLoading,
-} from "../store/selectors/auth-selectors";
-import { Header } from "./Header";
+} from "../../store/selectors/auth-selectors";
+import { Header } from "../Header";
 
 export const ProtectedRoute = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);

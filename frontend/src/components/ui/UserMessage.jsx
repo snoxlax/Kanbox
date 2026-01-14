@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   socketService,
   SOCKET_EVENT_REVIEW_ABOUT_YOU,
-} from "../services/socket-service";
+} from "../../services/socket-service";
 
 export function UserMessage() {
   const [msg, setMsg] = useState(null);

@@ -12,10 +12,10 @@ import {
   DriveFileRenameOutline,
 } from "@mui/icons-material";
 import { Popover } from "@mui/material";
-import { CardActionForm } from "./card/CardActionForm";
-import { PopoverMenu } from "./ui/PopoverMenu";
+import { CardActionForm } from "../card/CardActionForm";
+import { PopoverMenu } from "../ui/PopoverMenu";
 import { AddMemberMenu } from "./AddMemberMenu";
-import { copyCard, moveCard } from "../store/actions/board-actions";
+import { copyCard, moveCard } from "../../store/actions/board-actions";
 
 export function CardPopover({
   card,

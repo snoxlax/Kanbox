@@ -9,7 +9,6 @@
 @import "components/AboutUs";
 @import "pages/HomePage";
 @import "components/UserDetails";
-@import "components/LoginSignup";
 @import "components/Chat";
 
 @import "components/Header";

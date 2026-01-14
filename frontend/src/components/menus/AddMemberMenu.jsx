@@ -1,10 +1,10 @@
 import { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-import { PopoverMenu } from "./ui/PopoverMenu";
-import { Avatar } from "./ui/Avatar";
-import { addAssignee, removeAssignee } from "../store/actions/board-actions";
-import "../assets/styles/components/AddMemberMenu.css";
+import { PopoverMenu } from "../ui/PopoverMenu";
+import { Avatar } from "../ui/Avatar";
+import { addAssignee, removeAssignee } from "../../store/actions/board-actions";
+import "../../assets/styles/components/AddMemberMenu.css";
 
 export function AddMemberMenu({
   card,

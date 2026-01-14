@@ -10,9 +10,9 @@ import FormGroup from "@mui/material/FormGroup";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { Popover } from "./Popover";
-import { useCardFilters } from "../hooks/useCardFilters";
-import { getMembersFilterOptions } from "../services/filter-service";
+import { Popover } from "../ui/Popover";
+import { useCardFilters } from "../../hooks/useCardFilters";
+import { getMembersFilterOptions } from "../../services/filter-service";
 
 export function FilterMenu() {
   const members = useSelector(state => state.boards.board.members);

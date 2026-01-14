@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
-import { PopoverMenu } from "./ui/PopoverMenu";
+import { PopoverMenu } from "../ui/PopoverMenu";
 import {
   addCardAttachment,
   updateCardCover,
-} from "../store/actions/board-actions";
-import { COVER_COLORS } from "../services/board/board-backgrounds";
-import { attachmentService } from "../services/attachment-service";
+} from "../../store/actions/board-actions";
+import { COVER_COLORS } from "../../services/board/board-backgrounds";
+import { attachmentService } from "../../services/attachment-service";
 
 export function CardCoverMenu({ card, anchorEl, isOpen, onClose }) {
   const textOverlay = card.cover?.textOverlay;

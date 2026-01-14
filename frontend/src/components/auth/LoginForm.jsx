@@ -7,10 +7,10 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "@mui/material/Link";
-import { AuthFormLayout } from "./auth/AuthFormLayout";
-import { FormField } from "./forms/FormField";
-import { PasswordField } from "./forms/PasswordField";
-import { validationRules } from "../services/forms/validation-service";
+import { AuthFormLayout } from "./AuthFormLayout";
+import { FormField } from "../ui/FormField";
+import { PasswordField } from "../ui/PasswordField";
+import { validationRules } from "../../services/forms/validation-service";
 
 export function LoginForm({ onSubmit }) {
   const [submitStatus, setSubmitStatus] = useState(null);

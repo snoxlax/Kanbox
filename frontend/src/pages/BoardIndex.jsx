@@ -6,7 +6,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { loadBoards, loadBoard } from "../store/actions/board-actions";
 import { BoardPreview } from "../components/ui/BoardPreview";
-import { CreateBoardForm } from "../components/CreateBoardForm";
+import { CreateBoardForm } from "../components/board/CreateBoardForm";
 import { Avatar } from "../components/ui/Avatar";
 import { selectCurrentUser } from "../store/selectors/auth-selectors";
 

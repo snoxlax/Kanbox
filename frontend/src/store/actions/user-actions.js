@@ -1,6 +1,5 @@
 import {
   SET_USERS,
-  SET_USER,
   SET_WATCHED_USER,
   DELETE_USER,
   SET_LOADING,
@@ -9,7 +8,6 @@ import {
 
 import { store } from "../store";
 import { userService } from "../../services/user";
-import { socketService } from "../../services/socket-service";
 
 export async function loadUsers() {
   try {
@@ -33,41 +31,6 @@ export async function deleteUser(userId) {
   }
 }
 
-export async function login(credentials) {
-  try {
-    const user = await userService.login(credentials);
-    store.dispatch(setUser(user));
-    socketService.login(user._id);
-    return user;
-  } catch (error) {
-    store.dispatch(setError(`Error logging in: ${error.message}`));
-    throw error;
-  }
-}
-
-export async function signup(credentials) {
-  try {
-    const user = await userService.signup(credentials);
-    store.dispatch(setUser(user));
-    socketService.login(user._id);
-    return user;
-  } catch (error) {
-    store.dispatch(setError(`Error signing up: ${error.message}`));
-    throw error;
-  }
-}
-
-export async function logout() {
-  try {
-    await userService.logout();
-    store.dispatch(setUser(null));
-    socketService.logout();
-  } catch (error) {
-    store.dispatch(setError(`Error logging out: ${error.message}`));
-    throw error;
-  }
-}
-
 export async function loadUser(userId) {
   try {
     store.dispatch(setLoading(true));
@@ -82,10 +45,6 @@ export async function loadUser(userId) {
 
 function setUsers(users) {
   return { type: SET_USERS, payload: users };
-}
-
-function setUser(user) {
-  return { type: SET_USER, payload: user };
 }
 
 function setWatchedUser(user) {

@@ -2,8 +2,8 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
-import { removeCardAttachment } from "../store/actions/board-actions";
-import { attachmentService } from "../services/attachment-service";
+import { removeCardAttachment } from "../../store/actions/board-actions";
+import { attachmentService } from "../../services/attachment-service";
 
 function formatUploadedAt(dateInput) {
   const date = dateInput ? new Date(dateInput) : null;

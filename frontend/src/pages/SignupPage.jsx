@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import { SignupForm } from "../components/SignupForm";
+import { SignupForm } from "../components/auth/SignupForm";
 import { signup } from "../store/actions/auth-actions";
 
 export function SignupPage() {

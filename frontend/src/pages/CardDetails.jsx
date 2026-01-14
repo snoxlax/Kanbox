@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { CardModal } from "../components/CardModal";
+import { CardModal } from "../components/card/CardModal";
 import { useState, useEffect } from "react";
 import {
   deleteCard,

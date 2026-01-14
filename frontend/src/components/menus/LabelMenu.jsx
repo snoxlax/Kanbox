@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Popover } from "./Popover";
+import { Popover } from "../ui/Popover";
 import { LabelMenuItem } from "./LabelMenuItem";
 import { LabelEditor } from "./LabelEditor";
 import {
@@ -8,7 +8,7 @@ import {
   editLabel,
   deleteLabel,
   updateCardLabels,
-} from "../store/actions/board-actions";
+} from "../../store/actions/board-actions";
 
 export function LabelMenu({
   card,
