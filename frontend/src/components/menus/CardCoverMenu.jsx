@@ -7,7 +7,7 @@ import {
 import { COVER_COLORS } from "../../services/board/board-backgrounds";
 import { attachmentService } from "../../services/attachment-service";
 
-export function CardCoverMenu({ card, anchorEl, isOpen, onClose }) {
+export function CardCoverMenu({ card, anchorEl, isOpen, onClose, sx }) {
   const textOverlay = card.cover?.textOverlay;
   const coverColor = card.cover?.color;
   const coverImg = card.cover?.img;
@@ -97,6 +97,7 @@ export function CardCoverMenu({ card, anchorEl, isOpen, onClose }) {
         vertical: "top",
         horizontal: "left",
       }}
+      sx={sx}
     >
       <div className="attachment-menu-content">
         <div className="cover-section">

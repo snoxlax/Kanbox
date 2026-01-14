@@ -14,6 +14,7 @@ import {
 import { Popover } from "@mui/material";
 import { AddMemberMenu } from "./AddMemberMenu";
 import { CardActionMenu } from "./CardActionMenu";
+import { CardCoverMenu } from "./CardCoverMenu";
 import { copyCard, moveCard } from "../../store/actions/board-actions";
 
 export function CardPopover({
@@ -44,8 +45,8 @@ export function CardPopover({
       },
 
       changeCover: () => {
-        console.log("Change cover");
-        // TODO: Implement change cover
+        setSubmenuAnchorEl(e.currentTarget);
+        setActiveSubmenu(menuKey);
       },
 
       copyLink: () => {
@@ -191,6 +192,17 @@ export function CardPopover({
           anchorEl={submenuAnchorEl}
           isMemberMenuOpen={isSubmenuOpen}
           onCloseMemberMenu={handleSubmenuClose}
+          sx={{
+            zIndex: theme => theme.zIndex.modal + 2,
+          }}
+        />
+      )}
+      {isSubmenuOpen && activeSubmenu === "changeCover" && (
+        <CardCoverMenu
+          card={card}
+          anchorEl={submenuAnchorEl}
+          isOpen={isSubmenuOpen}
+          onClose={handleSubmenuClose}
           sx={{
             zIndex: theme => theme.zIndex.modal + 2,
           }}
