@@ -15,6 +15,7 @@ export function LabelMenu({
   anchorEl,
   isLabelMenuOpen,
   onCloseLabelMenu,
+  sx,
 }) {
   const [viewEditor, setViewEditor] = useState(false);
   const [labelToEdit, setLabelToEdit] = useState(null);
@@ -94,6 +95,7 @@ export function LabelMenu({
       }}
       paperProps={{ sx: { mt: 1 } }}
       slotProps={{ transition: { onExited: () => handleCloseLabelMenu() } }}
+      sx={sx}
     >
       {viewEditor ? (
         <LabelEditor

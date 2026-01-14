@@ -15,6 +15,7 @@ import { Popover } from "@mui/material";
 import { AddMemberMenu } from "./AddMemberMenu";
 import { CardActionMenu } from "./CardActionMenu";
 import { CardCoverMenu } from "./CardCoverMenu";
+import { LabelMenu } from "./LabelMenu";
 import { copyCard, moveCard } from "../../store/actions/board-actions";
 
 export function CardPopover({
@@ -40,8 +41,8 @@ export function CardPopover({
       archive: () => handleDelete(),
 
       editLabels: () => {
-        console.log("Edit labels");
-        // TODO: Implement edit labels
+        setSubmenuAnchorEl(e.currentTarget);
+        setActiveSubmenu(menuKey);
       },
 
       changeCover: () => {
@@ -192,6 +193,17 @@ export function CardPopover({
           anchorEl={submenuAnchorEl}
           isMemberMenuOpen={isSubmenuOpen}
           onCloseMemberMenu={handleSubmenuClose}
+          sx={{
+            zIndex: theme => theme.zIndex.modal + 2,
+          }}
+        />
+      )}
+      {isSubmenuOpen && activeSubmenu === "editLabels" && (
+        <LabelMenu
+          card={card}
+          anchorEl={submenuAnchorEl}
+          isLabelMenuOpen={isSubmenuOpen}
+          onCloseLabelMenu={handleSubmenuClose}
           sx={{
             zIndex: theme => theme.zIndex.modal + 2,
           }}

@@ -17,24 +17,38 @@ export function Popover({
   onBack,
   paperProps = {},
   slotProps = {},
+  sx,
   ...popoverProps
 }) {
+  const mergedSlotProps = {
+    ...slotProps,
+    root: {
+      ...slotProps.root,
+      sx: [{ pointerEvents: "none" }, slotProps.root?.sx, sx].filter(Boolean),
+    },
+    backdrop: {
+      ...slotProps.backdrop,
+      sx: [{ pointerEvents: "none" }, slotProps.backdrop?.sx].filter(Boolean),
+    },
+    paper: {
+      className: "popover-paper",
+      ...paperProps,
+      ...slotProps.paper,
+      sx: [
+        { pointerEvents: "auto" },
+        paperProps.sx,
+        slotProps.paper?.sx,
+      ].filter(Boolean),
+    },
+  };
+
   return (
     <ClickAwayListener onClickAway={onClose} mouseEvent="onMouseDown">
       <PopoverMUI
         open={isOpen}
         anchorEl={anchorEl}
         onClose={onClose}
-        slotProps={{
-          root: { sx: { pointerEvents: "none" } },
-          backdrop: { sx: { pointerEvents: "none" } },
-          paper: {
-            className: "popover-paper",
-            ...paperProps,
-            sx: { pointerEvents: "auto", ...paperProps.sx },
-          },
-          ...slotProps,
-        }}
+        slotProps={mergedSlotProps}
         {...popoverProps}
       >
         <Box className="popover-header">
