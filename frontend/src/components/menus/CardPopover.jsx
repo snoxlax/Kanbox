@@ -12,9 +12,8 @@ import {
   DriveFileRenameOutline,
 } from "@mui/icons-material";
 import { Popover } from "@mui/material";
-import { CardActionForm } from "../card/CardActionForm";
-import { PopoverMenu } from "../ui/PopoverMenu";
 import { AddMemberMenu } from "./AddMemberMenu";
+import { CardActionMenu } from "./CardActionMenu";
 import { copyCard, moveCard } from "../../store/actions/board-actions";
 
 export function CardPopover({
@@ -27,45 +26,53 @@ export function CardPopover({
   handleClose,
   handleDelete,
 }) {
-  const [popoverAnchorEl, setPopoverAnchorEl] = useState(null);
-  const [activeMenuItem, setActiveMenuItem] = useState(null);
+  const [submenuAnchorEl, setSubmenuAnchorEl] = useState(null);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const { boardId } = useParams();
 
-  function handleOpen() {
-    openCard();
-  }
-
-  function handleEditLabels() {
-    console.log("editLabels");
-  }
-
-  function handleArchive() {
-    handleDelete();
-  }
-
-  function handleCopyCardClick(e) {
-    setPopoverAnchorEl(e.currentTarget);
-    setActiveMenuItem("copyCard");
-  }
-
-  function handleMoveCardClick(e) {
-    setPopoverAnchorEl(e.currentTarget);
-    setActiveMenuItem("moveCard");
-  }
-
-  function handleChangeMembersClick(e) {
-    setPopoverAnchorEl(e.currentTarget);
-    setActiveMenuItem("changeMembers");
-  }
-
-  function handleCopyLinkClick(e) {
+  function handleMenuItemClick(e, menuKey) {
     e.stopPropagation();
-    navigator.clipboard.writeText(
-      `${window.location.origin}/board/${boardId}/${listId}/${card._id}`
-    );
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
+
+    const actions = {
+      open: () => openCard(),
+      archive: () => handleDelete(),
+
+      editLabels: () => {
+        console.log("Edit labels");
+        // TODO: Implement edit labels
+      },
+
+      changeCover: () => {
+        console.log("Change cover");
+        // TODO: Implement change cover
+      },
+
+      copyLink: () => {
+        navigator.clipboard.writeText(
+          `${window.location.origin}/board/${boardId}/${listId}/${card._id}`
+        );
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 2000);
+      },
+
+      changeMembers: () => {
+        setSubmenuAnchorEl(e.currentTarget);
+        setActiveSubmenu(menuKey);
+      },
+
+      copyCard: () => {
+        setSubmenuAnchorEl(e.currentTarget);
+        setActiveSubmenu(menuKey);
+      },
+
+      moveCard: () => {
+        setSubmenuAnchorEl(e.currentTarget);
+        setActiveSubmenu(menuKey);
+      },
+    };
+
+    actions[menuKey]?.();
   }
 
   function handleCopyCardSubmit(formData) {
@@ -90,7 +97,7 @@ export function CardPopover({
     };
 
     copyCard(copyData, card);
-    handlePopoverClose();
+    handleSubmenuClose();
     handleClose();
   }
 
@@ -110,30 +117,16 @@ export function CardPopover({
     };
 
     moveCard(moveData, card);
-    handlePopoverClose();
+    handleSubmenuClose();
     handleClose();
   }
 
-  function handleMenuClick(e, key) {
-    e.stopPropagation();
-    const menuHandlers = {
-      open: handleOpen,
-      editLabels: handleEditLabels,
-      copyCard: handleCopyCardClick,
-      copyLink: handleCopyLinkClick,
-      moveCard: handleMoveCardClick,
-      changeMembers: handleChangeMembersClick,
-      archive: handleArchive,
-    };
-    menuHandlers[key]?.(e);
+  function handleSubmenuClose() {
+    setSubmenuAnchorEl(null);
+    setActiveSubmenu(null);
   }
 
-  function handlePopoverClose() {
-    setPopoverAnchorEl(null);
-    setActiveMenuItem(null);
-  }
-
-  const popoverOpen = Boolean(popoverAnchorEl);
+  const isSubmenuOpen = Boolean(submenuAnchorEl);
 
   return (
     <>
@@ -175,9 +168,9 @@ export function CardPopover({
           {cardActionsMenuItems().map(({ label, key, icon }) => (
             <button
               key={key}
-              onClick={e => handleMenuClick(e, key)}
+              onClick={e => handleMenuItemClick(e, key)}
               className={`card-menu-button ${
-                activeMenuItem === key ? "is-active" : ""
+                activeSubmenu === key ? "is-active" : ""
               }`}
             >
               {key === "copyLink" && copiedLink ? (
@@ -190,46 +183,31 @@ export function CardPopover({
           ))}
         </div>
       </Popover>
-      {popoverOpen && activeMenuItem === "changeMembers" && (
+      {isSubmenuOpen && activeSubmenu === "changeMembers" && (
         <AddMemberMenu
           boardId={boardId}
           listId={listId}
           card={card}
-          anchorEl={popoverAnchorEl}
-          isMemberMenuOpen={popoverOpen}
-          onCloseMemberMenu={handlePopoverClose}
+          anchorEl={submenuAnchorEl}
+          isMemberMenuOpen={isSubmenuOpen}
+          onCloseMemberMenu={handleSubmenuClose}
           sx={{
             zIndex: theme => theme.zIndex.modal + 2,
           }}
         />
       )}
-      {popoverOpen &&
-        (activeMenuItem === "copyCard" || activeMenuItem === "moveCard") && (
-          <PopoverMenu
-            anchorEl={popoverAnchorEl}
-            isOpen={popoverOpen}
-            onClose={handlePopoverClose}
-            title={activeMenuItem === "copyCard" ? "Copy to..." : "Move to..."}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            paperProps={{ sx: { mt: 1 } }}
-            sx={{
-              zIndex: theme => theme.zIndex.modal + 2,
-            }}
-          >
-            <CardActionForm
-              card={card}
-              listId={listId}
-              isCopyMode={activeMenuItem === "copyCard"}
-              onCopySubmit={handleCopyCardSubmit}
-              onMoveSubmit={handleMoveCardSubmit}
-              submitButtonText={
-                activeMenuItem === "copyCard" ? "Create card" : "Move"
-              }
-            />
-          </PopoverMenu>
+      {isSubmenuOpen &&
+        (activeSubmenu === "copyCard" || activeSubmenu === "moveCard") && (
+          <CardActionMenu
+            anchorEl={submenuAnchorEl}
+            isOpen={isSubmenuOpen}
+            onClose={handleSubmenuClose}
+            card={card}
+            listId={listId}
+            mode={activeSubmenu}
+            onCopySubmit={handleCopyCardSubmit}
+            onMoveSubmit={handleMoveCardSubmit}
+          />
         )}
     </>
   );
