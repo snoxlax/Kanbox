@@ -44,6 +44,7 @@
 
 .floating-card-content-container {
   border: 1px solid var(--black);
+  background-color: var(--gray4);
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -72,7 +73,6 @@
   position: relative;
   display: flex;
   margin-top: auto;
-  background-color: var(--gray4);
   flex-direction: column;
   color: var(--gray1);
   border-radius: 0 0 6px 6px;

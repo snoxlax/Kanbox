@@ -86,13 +86,10 @@ export function Card({
       }
     : undefined;
 
-  const overlayContentStyle =
-    isOverlay && coverImg
-      ? {
-          background:
-            "linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 100%)",
-        }
-      : undefined;
+  const overlayContentStyle = {
+    background:
+      "linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 100%)",
+  };
 
   return (
     <Draggable draggableId={card._id} index={index}>
@@ -181,17 +178,16 @@ export function Card({
               ref={editCardRef}
               className="card-content-container"
               onClick={handleClickCard}
-              sx={card.cover?.textOverlay ? coverStyle : undefined}
+              sx={isOverlay ? coverStyle : undefined}
             >
-              {(card.cover?.color || card.cover?.img) &&
-                !card.cover?.textOverlay && (
-                  <div className="card-cover" style={coverStyle}></div>
-                )}
+              {(card.cover?.color || card.cover?.img) && !isOverlay && (
+                <div className="card-cover" style={coverStyle}></div>
+              )}
               <div
-                className={`card-content ${
-                  isOverlay && coverImg ? "card-content--overlay" : ""
-                }`}
-                style={overlayContentStyle}
+                className={`${
+                  isOverlay ? "card-content--overlay" : ""
+                } card-content`}
+                style={isOverlay && coverImg ? overlayContentStyle : {}}
               >
                 {shouldShowLabels && (
                   <div className="card-labels" onClick={handleClickLabels}>
