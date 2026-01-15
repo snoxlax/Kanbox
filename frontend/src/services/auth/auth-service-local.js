@@ -12,10 +12,11 @@ const CURRENT_USER_SESSION_KEY = "currentUser";
 
 export async function signup(userData) {
   try {
-    const { password: _, ...userWithoutPassword } = await storageService.post(
-      USERS_STORAGE_KEY,
-      userData
-    );
+    const {
+      password: _,
+      confirmPassword: __,
+      ...userWithoutPassword
+    } = await storageService.post(USERS_STORAGE_KEY, userData);
     setCurrentUserInSession(userWithoutPassword);
     return userWithoutPassword;
   } catch (error) {

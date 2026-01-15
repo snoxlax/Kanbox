@@ -4,7 +4,25 @@ import createError from "http-errors";
 import { config } from "../config/env.js";
 
 export async function signup(req, res) {
-  const { email, username, fullname, password } = req.body;
+  const { email, fullname, password, confirmPassword, username } = req.body;
+
+  if (!email || !email.includes("@")) {
+    throw createError(400, "Email must include @");
+  }
+  if (!fullname?.trim()) {
+    throw createError(400, "Full name is required");
+  }
+  if (!password) {
+    throw createError(400, "Password is required");
+  }
+  if (confirmPassword !== undefined && confirmPassword !== password) {
+    throw createError(400, "Passwords do not match");
+  }
+
+  if (!username) {
+    throw createError(400, "Username is required");
+  }
+
   const existingUser = await User.findOne({ $or: [{ email }, { username }] });
   if (existingUser) throw createError(409, "User already exists");
 

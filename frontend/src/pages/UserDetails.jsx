@@ -1,9 +1,6 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { loadUser } from "../store/actions/user-actions";
-import { store } from "../store/store";
+import { userService } from "../services/user";
 import {
   socketService,
   SOCKET_EVENT_USER_UPDATED,
@@ -12,26 +9,42 @@ import {
 
 export function UserDetails() {
   const params = useParams();
-  const user = useSelector(storeState => storeState.userModule.watchedUser);
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadUser(params.id);
 
     socketService.emit(SOCKET_EMIT_USER_WATCH, params.id);
-    socketService.on(SOCKET_EVENT_USER_UPDATED, user => {
-      store.dispatch({ type: "SET_WATCHED_USER", user });
-    });
+    const handleUserUpdated = updatedUser => {
+      setUser(updatedUser);
+    };
+    socketService.on(SOCKET_EVENT_USER_UPDATED, handleUserUpdated);
 
     return () => {
-      socketService.off(SOCKET_EVENT_USER_UPDATED, user => {
-        store.dispatch({ type: "SET_WATCHED_USER", user });
-      });
+      socketService.off(SOCKET_EVENT_USER_UPDATED, handleUserUpdated);
     };
   }, [params.id]);
+
+  async function loadUser(userId) {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const userData = await userService.getById(userId);
+      setUser(userData);
+    } catch (err) {
+      setError(`Error loading user: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <section className="user-details">
       <h1>User Details</h1>
+      {isLoading && "Loading..."}
+      {error && <div style={{ color: "red" }}>{error}</div>}
       {user && (
         <div>
           <h3>{user.fullname}</h3>

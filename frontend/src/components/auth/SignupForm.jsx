@@ -25,8 +25,10 @@ export function SignupForm({ onSubmit }) {
     mode: "onChange",
     defaultValues: {
       email: "",
-      fullname: "",
+      firstName: "",
+      lastName: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -71,12 +73,21 @@ export function SignupForm({ onSubmit }) {
         />
 
         <FormField
-          name="fullname"
+          name="firstName"
           control={control}
           errors={errors}
-          label="Full name"
-          placeholder="Enter full name"
-          rules={validationRules.fullname}
+          label="First name"
+          placeholder="Enter first name"
+          rules={validationRules.firstName}
+        />
+
+        <FormField
+          name="lastName"
+          control={control}
+          errors={errors}
+          label="Last name"
+          placeholder="Enter last name"
+          rules={validationRules.lastName}
         />
 
         <Box className="auth-form-field">
@@ -100,6 +111,19 @@ export function SignupForm({ onSubmit }) {
             password={watchedPassword}
           />
         </Box>
+
+        <PasswordField
+          name="confirmPassword"
+          control={control}
+          errors={errors}
+          label="Confirm password"
+          placeholder="Re-enter password"
+          rules={{
+            required: "Confirm password is required",
+            validate: value =>
+              value === watchedPassword || "Passwords do not match",
+          }}
+        />
 
         <Box className="auth-form-field">
           <FormControlLabel

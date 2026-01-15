@@ -2,10 +2,8 @@ export const validationRules = {
   email: {
     required: "Email is required",
     pattern: {
-      // Matches: username@domain.tld (case-insensitive)
-      // Allows: letters, numbers, dots, underscores, percent, plus, hyphen
-      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-      message: "Invalid email address",
+      value: /@/,
+      message: "Email must include @",
     },
   },
 
@@ -27,6 +25,20 @@ export const validationRules = {
     minLength: {
       value: 2,
       message: "Name must be at least 2 characters",
+    },
+  },
+  firstName: {
+    required: "First name is required",
+    minLength: {
+      value: 2,
+      message: "First name must be at least 2 characters",
+    },
+  },
+  lastName: {
+    required: "Last name is required",
+    minLength: {
+      value: 2,
+      message: "Last name must be at least 2 characters",
     },
   },
 };
