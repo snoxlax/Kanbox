@@ -17,6 +17,12 @@ export async function getAllBoards() {
   return await Board.find();
 }
 
+export async function getBoardsForUser(userId) {
+  return await Board.find({
+    $or: [{ "owner.userId": userId }, { "members.userId": userId }],
+  });
+}
+
 export async function getBoardById(id) {
   return await Board.findById(id);
 }

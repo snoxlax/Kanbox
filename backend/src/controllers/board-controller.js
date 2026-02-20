@@ -24,9 +24,9 @@ export async function createBoard(req, res) {
   }
 }
 
-export async function getAllBoards(_req, res) {
+export async function getAllBoards(req, res) {
   try {
-    const boards = await boardService.getAllBoards();
+    const boards = await boardService.getBoardsForUser(req.currentUser._id);
     res.json({ boards });
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch boards" });

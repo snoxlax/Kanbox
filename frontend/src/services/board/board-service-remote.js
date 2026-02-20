@@ -338,6 +338,7 @@ async function getBoardPreviews() {
     _id: board._id,
     title: board.title,
     appearance: board.appearance,
+    owner: board.owner,
   }));
 }
 

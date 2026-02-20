@@ -35,7 +35,9 @@ export function BoardIndex() {
   }, [boards, searchTerm]);
 
   const userBoards = useMemo(() => {
-    return filteredBoards.filter(board => board.createdBy === currentUser?._id);
+    return filteredBoards.filter(
+      board => board.owner?.userId === currentUser?._id
+    );
   }, [filteredBoards, currentUser]);
 
   return (
