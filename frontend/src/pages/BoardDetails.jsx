@@ -45,7 +45,13 @@ export function BoardDetails() {
   useDragToScroll(boardCanvasRef, { sensitivity: 1, enabled: !!board });
   const { filters, updateFilters } = useCardFilters();
   const [lists, setLists] = useState(board?.lists || []);
+  const [prevBoard, setPrevBoard] = useState(board);
   const isFromUrlUpdate = useRef(false);
+
+  if (board !== prevBoard) {
+    setPrevBoard(board);
+    setLists(board?.lists || []);
+  }
 
   const boardUsers = useMemo(() => {
     if (!board) return [];
@@ -56,12 +62,6 @@ export function BoardDetails() {
       m => String(m.userId) !== String(owner.userId)
     );
     return [owner, ...nonOwnerMembers];
-  }, [board]);
-
-  useEffect(() => {
-    if (board) {
-      setLists(board.lists);
-    }
   }, [board]);
 
   useEffect(() => {
