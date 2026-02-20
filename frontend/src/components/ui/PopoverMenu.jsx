@@ -15,6 +15,7 @@ export function PopoverMenu({
   anchorOrigin,
   transformOrigin,
   paperProps,
+  transitionDuration,
   sx,
 }) {
   function handlePopoverClose(event, reason) {
@@ -33,6 +34,7 @@ export function PopoverMenu({
       transformOrigin={transformOrigin}
       disableEnforceFocus
       disableRestoreFocus
+      transitionDuration={transitionDuration}
       slotProps={{
         paper: {
           className: "popover-paper",

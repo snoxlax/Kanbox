@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { FilterMenu } from "../components/menus/FilterMenu";
 import { Footer } from "../components/Footer";
 import { List } from "../components/board/List";
 import { BoardMenu } from "../components/menus/BoardMenu";
+import { BoardMembersMenu } from "../components/menus/BoardMembersMenu";
 import { Avatar } from "../components/ui/Avatar";
 import { AvatarGroup } from "../components/ui/AvatarGroup";
 import { useCardFilters } from "../hooks/useCardFilters";
@@ -34,6 +35,7 @@ import {
 export function BoardDetails() {
   const [activeAddCardListId, setActiveAddCardListId] = useState(null);
   const [boardMenuAnchorEl, setBoardMenuAnchorEl] = useState(null);
+  const [membersMenuAnchorEl, setMembersMenuAnchorEl] = useState(null);
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const board = useSelector(state => state.boards.board);
@@ -44,6 +46,17 @@ export function BoardDetails() {
   const { filters, updateFilters } = useCardFilters();
   const [lists, setLists] = useState(board?.lists || []);
   const isFromUrlUpdate = useRef(false);
+
+  const boardUsers = useMemo(() => {
+    if (!board) return [];
+    const owner = board.owner;
+    const members = board.members || [];
+    if (!owner) return members;
+    const nonOwnerMembers = members.filter(
+      m => String(m.userId) !== String(owner.userId)
+    );
+    return [owner, ...nonOwnerMembers];
+  }, [board]);
 
   useEffect(() => {
     if (board) {
@@ -194,17 +207,29 @@ export function BoardDetails() {
       <header className={`board-header`}>
         <h2 className="board-title">{board.title}</h2>
         <div className="board-header-right">
-          {board.members && board.members.length > 0 && (
-            <AvatarGroup size={32} max={4}>
-              {board.members.map(member => (
-                <Avatar
-                  size={32}
-                  fontSize={16}
-                  key={member._id}
-                  user={member}
-                />
-              ))}
-            </AvatarGroup>
+          {boardUsers.length > 0 && (
+            <div
+              role="button"
+              tabIndex={0}
+              style={{ cursor: "pointer" }}
+              onClick={e => setMembersMenuAnchorEl(e.currentTarget)}
+              onKeyDown={e => {
+                if (e.key === "Enter" || e.key === " ")
+                  setMembersMenuAnchorEl(e.currentTarget);
+              }}
+              aria-label="View board members"
+            >
+              <AvatarGroup size={32} max={4}>
+                {boardUsers.map(user => (
+                  <Avatar
+                    size={32}
+                    fontSize={16}
+                    key={user.userId}
+                    user={user}
+                  />
+                ))}
+              </AvatarGroup>
+            </div>
           )}
           <FilterMenu />
           <IconButton variant="square">
@@ -268,6 +293,12 @@ export function BoardDetails() {
         anchorEl={boardMenuAnchorEl}
         isBoardMenuOpen={Boolean(boardMenuAnchorEl)}
         onCloseBoardMenu={handleCloseBoardMenu}
+      />
+      <BoardMembersMenu
+        board={board}
+        anchorEl={membersMenuAnchorEl}
+        isOpen={Boolean(membersMenuAnchorEl)}
+        onClose={() => setMembersMenuAnchorEl(null)}
       />
     </section>
   );
