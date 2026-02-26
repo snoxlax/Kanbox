@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { UserMessage } from "./components/ui/UserMessage";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { AdminIndex } from "./pages/AdminIndex";
 import { AboutUs, AboutTeam, AboutVision } from "./pages/AboutUs";
@@ -18,8 +17,6 @@ export function App() {
 
   return (
     <div className="main">
-      <UserMessage />
-
       <main className="main-container">
         <Routes location={backgroundLocation || location}>
           <Route path="" element={<HomePage />} />

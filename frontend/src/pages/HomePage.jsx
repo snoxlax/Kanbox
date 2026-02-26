@@ -16,7 +16,6 @@ export function HomePage() {
   const user = useSelector(storeState => storeState.auth.currentUser);
   const { mode, setMode } = useColorScheme();
   const videoRef = useRef(null);
-  console.log(user);
 
   const handleToggle = () => {
     setMode(mode === "light" ? "dark" : "light");

@@ -1,10 +1,10 @@
 import Axios from "axios";
 
 // Use environment variable for API URL, fallback to relative path or localhost
-const BASE_URL = import.meta.env.VITE_API_URL 
+const BASE_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api/`
-  : import.meta.env.PROD 
-    ? "/api/" 
+  : import.meta.env.PROD
+    ? "/api/"
     : "//localhost:3000/api/";
 
 const axios = Axios.create({ withCredentials: true });
@@ -34,15 +34,13 @@ async function ajax(endpoint, method = "GET", data = null) {
     const res = await axios(options);
     return res.data;
   } catch (err) {
-    console.error(
-      `Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `,
-      data
-    );
-    console.error(err);
-    // if (err.response && err.response.status === 401) {
-    //   sessionStorage.clear();
-    //   window.location.assign("/");
-    // }
+    if (import.meta.env.DEV) {
+      console.error(
+        `Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `,
+        data
+      );
+      console.error(err);
+    }
     throw err;
   }
 }

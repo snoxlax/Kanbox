@@ -150,7 +150,7 @@ export function BoardDetails() {
 
     try {
       if (type === "LIST") {
-        const { newLists, listToMove, before, after } = reorderLists(
+        const { newLists, listToMove } = reorderLists(
           lists,
           source.index,
           destination.index

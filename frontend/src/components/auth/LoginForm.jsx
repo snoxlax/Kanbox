@@ -85,6 +85,7 @@ export function LoginForm({ onSubmit }) {
 
         <Button
           type="submit"
+          variant="contained"
           fullWidth
           className="auth-continue-button"
           disabled={!isValid || isSubmitting}
